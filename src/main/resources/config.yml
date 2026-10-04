@@ -1,0 +1,85 @@
+# NexusHusbandry configuration.
+
+enabled: true
+
+genetics:
+  # A wild-spawned (or pre-existing) animal's genome is randomized around this center...
+  wild-genome-center: 0.5
+  # ...within +/- this spread, independently per gene. So at the defaults below, a wild animal's
+  # genes land somewhere in roughly [0.2, 0.8] -- real variance for players to selectively breed
+  # up from, not every wild animal starting identical.
+  wild-genome-spread: 0.3
+  # Per-gene chance, at every breeding, that a child's inherited (averaged) gene gets nudged
+  # instead of landing exactly on the parental average.
+  mutation-chance: 0.08
+  # Max magnitude of an ordinary mutation nudge, in either direction.
+  mutation-strength: 0.12
+  # Real, symmetric Attribute.ADD_SCALAR spread applied around vanilla's own default for
+  # MAX_HEALTH/MOVEMENT_SPEED/ATTACK_DAMAGE. A gene of exactly 0.5 contributes none of this at
+  # all (vanilla's own normal value); 1.0 adds this fraction, 0.0 subtracts it.
+  trait-attribute-scalar-range: 0.5
+  # Base chance of a bonus second offspring ("twins") on any breeding, before fertility's own
+  # bonus is added.
+  twin-base-chance: 0.02
+  # Additional twin chance at full (1.0) average parental fertility, added on top of the base
+  # chance above.
+  twin-fertility-bonus-chance: 0.18
+
+welfare:
+  # Happiness lost per real minute an animal goes untouched.
+  happiness-decay-per-minute: 0.5
+  # Happiness never decays below this floor -- a neglected animal gets miserable, not inert.
+  happiness-floor: 10.0
+  feed-happiness-boost: 15.0
+  shear-happiness-penalty: 5.0
+  wool-regrow-happiness-boost: 4.0
+  # An animal below this happiness won't enter real love mode at all -- this plugin's own
+  # welfare gate on breeding.
+  breeding-happiness-threshold: 40.0
+  # A modest happiness boost both real parents get after a successful real breeding.
+  breeding-happiness-boost: 8.0
+  # Max fraction of infection-chance resistance a fully (100) happy animal gets; see veterinary's
+  # own base-infection-chance below for the other half of this formula.
+  happiness-disease-resistance: 0.6
+
+veterinary:
+  # Base chance, checked on every real interaction with a healthy animal, that it comes down
+  # sick -- scaled up by injury and down by happiness-driven resistance (see welfare's own
+  # happiness-disease-resistance above).
+  base-infection-chance: 0.01
+  # Injury gained per point of real damage an animal takes.
+  injury-per-damage-point: 0.05
+  # How much a fully (1.0) injured animal's infection chance is multiplied by, on top of the base
+  # chance, relative to an uninjured one.
+  injury-infection-risk-multiplier: 2.0
+  # Injury healed per real minute elapsed, independent of being cured.
+  injury-heal-per-minute: 0.02
+  initial-disease-severity: 0.1
+  # Disease severity gained per real minute left untreated.
+  disease-progression-per-minute: 0.05
+  # Severity at or above which disease actually starts costing the animal real health.
+  lethal-severity-threshold: 0.75
+  # Max real health a fully progressed, untreated disease can cost an animal.
+  max-disease-health-loss: 12.0
+  # Disease alone never finishes an animal off outright -- health is floored here, never 0.
+  disease-health-floor: 2.0
+  # Real ticks the symptom PotionEffect is (re)applied for -- refreshed on every check, since
+  # this project's own sandbox doesn't simulate real tick-by-tick potion-effect expiry.
+  symptom-duration-ticks: 200
+  cure-happiness-boost: 10.0
+  cure-injury-heal: 0.3
+  # Base chance a sick animal spreads its disease to one specific healthy neighbor -- scales
+  # with how far that disease has already progressed; see DiseaseMath#trySpreadOnce.
+  contagion-base-chance: 0.15
+
+pedigree:
+  # A separate, rare roll (independent of ordinary per-gene mutation above) that, if it hits,
+  # replaces one randomly-chosen gene outright with a near-perfect value.
+  rare-mutation-chance: 0.03
+  # Floor for how exceptional a rare-mutation gene lands -- always at least this good.
+  rare-mutation-floor: 0.9
+  # An animal's overall genome quality (plain average of all four genes) at or above this,
+  # independent of any rare mutation, also qualifies it as a prime specimen.
+  prime-specimen-quality-threshold: 0.8
+  # How many entries the server-wide hall of fame keeps (lowest-quality entry evicted once full).
+  hall-of-fame-size: 10

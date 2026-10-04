@@ -1,0 +1,22 @@
+name: NexusHusbandry
+version: ${project.version}
+main: com.nexuscraft.nexushusbandry.NexusHusbandryPlugin
+api-version: '1.21'
+author: RealSociety
+description: "A massive overhaul of animal breeding and husbandry, taken deliberately over the top. Every cow, pig, sheep, chicken, rabbit, and horse carries a real, inherited genome that blends from both real parents and applies as live bonuses onto real vanilla attributes. A lazily-decayed happiness value, raised by real feeding and lowered by neglect, genuinely gates whether an animal will enter real love mode at all. Three species-flavored diseases can take hold, worse the more injured and unhappy an animal is, cured by a real brewed Potion of Healing this plugin recognizes and tags. Every bred animal's generation and lineage is tracked, rare mutations can produce a near-perfect specimen outright, and the best of them are logged to a server-wide hall of fame."
+
+commands:
+  nexushusbandry:
+    description: Inspect the animal you're looking at, view the hall of fame, or reload config.
+    usage: /nexushusbandry <inspect|hof|reload>
+    aliases: [husbandry, nh]
+    permission: nexushusbandry.use
+    permission-message: "§cYou don't have permission to do that."
+
+permissions:
+  nexushusbandry.admin:
+    description: Reload NexusHusbandry's config.
+    default: op
+  nexushusbandry.use:
+    description: Inspect animals and view the hall of fame.
+    default: true
